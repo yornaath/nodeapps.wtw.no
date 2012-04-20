@@ -1,0 +1,16 @@
+{
+  "author": "gorillatron",
+  "name": "apps",
+  "description": "apploader",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andtan/nodeapps.wtw.no.git"
+  },
+  "engines": {
+    "node": "~0.6.11"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "main": "apploader.js"
+}

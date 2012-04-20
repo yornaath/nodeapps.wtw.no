@@ -3,13 +3,13 @@
  * Module dependencies.
  */
 
-var express = require('express')
+var express = require('express'),
+    apploader = require('./apps')
 
 var server = module.exports = express.createServer();
 
 // Configuration
 
-var apps = {}
 
 server.configure(function(){
   server.set('views', __dirname + '/views')
@@ -30,21 +30,16 @@ server.configure('production', function(){
 // Routes
 
 server.all(/\/.*/, function(req, res, next) {
-  var app,
-      subdomain
-  
-  app = null
-  subdomain = (/(.*)\..*\..*/).exec(req.headers['x-forwarded-host'])[1]
-  if(!apps[subdomain]) {
-    apps[subdomain] = require('./apps/'+subdomain) || null
-  }
-  app = apps[subdomain]
-  if(app) {
-    app.emit('request', req, res)
-  }
-  else {
-    res.redirect('/404')
-  }
+
+  var subdomain = (/(.*)\..*\..*/).exec(req.headers['x-forwarded-host'])[1]
+  apploader.load(subdomain, function(err, app) {
+    if(err || !app) {
+      res.redirect('/404')  
+    } else {
+      app.emit('request', req, res)  
+    }
+  })
+
 })
 
 server.listen(3000);
