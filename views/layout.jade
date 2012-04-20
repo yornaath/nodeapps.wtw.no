@@ -1,0 +1,30 @@
+!!!
+html
+  head
+    
+    title= title
+    link(rel='stylesheet', href='<%=  %>LOL/stylesheets/style.css')
+    
+    script(src="http://ajaxorg.github.com/ace/build/src/ace.js")
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/channel/bcsocket.js")
+    script(src="/share/share.js")
+    script(src="/share/ace.js")
+
+    script(src="/javascripts/main.js")
+
+    script
+      setTimeout(function() {
+        codeEditor = ace.edit("editor");
+
+        codeEditor
+
+        $('#overlay').addClass('active')
+
+        sharejs.open('hello', 'text', function(error, doc) {
+            $('#overlay').removeClass('active')
+            doc.attach_ace(codeEditor);
+        });
+      }, 100)
+  body!= body
