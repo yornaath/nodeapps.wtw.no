@@ -10,3 +10,11 @@ html
     script(src="javascripts/vendor/require.js", data-main="javascripts/app/main.js")
 
   body!= body
+
+  script(type="text/template", id="vhost-template")
+    li.vhost
+      span="path:"
+      <%= vhost.get('configpath') %>
+      span="config:"
+      <%= vhost.get('configdata') %>
+      

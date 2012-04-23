@@ -23,7 +23,7 @@ function isFile(filepath) {
 var Vhost = (function(){
   
   function Vhost(confpath){
-    
+    this.data = {}
   }
   
   Vhost.prototype = new EventEmitter()
@@ -95,8 +95,8 @@ var Vhost = (function(){
       if(err) {
         return cb(err)
       }
-      vhost['configpath'] = configpath
-      vhost['configdata'] = configdata
+      vhost.set('configpath', configpath)
+      vhost.set('configdata', configdata)
       cb(null, vhost)
     })
   }
@@ -126,6 +126,18 @@ var Vhost = (function(){
 
   Vhost.prototype.save = function(cb) {
     
+  }
+
+  Vhost.prototype.set = function(key, val) {
+    this.data[key] = val
+  }
+
+  Vhost.prototype.get = function(key) {
+    return this.data[key]
+  }
+
+  Vhost.prototype.toJSON = function() {
+    return this.data
   }
 
   return Vhost

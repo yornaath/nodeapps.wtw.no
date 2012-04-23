@@ -31,3 +31,5 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
+app.get('/vhost', routes.api.vhost.all)
+
