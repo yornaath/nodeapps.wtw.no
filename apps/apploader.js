@@ -5,7 +5,7 @@ var apps = {}
 function load(subdomain, cb) {
   if(!apps[subdomain]) {
     try {
-      var app = require(subdomain) 
+      var app = require(__dirname + "/" + subdomain) 
     } catch(e) {
       
     }

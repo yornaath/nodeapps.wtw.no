@@ -1,8 +1,8 @@
 
 
 var express = require('express'),
-    apploader = require('./apps')
-
+    apploader = require('./apps'),
+    os = require('os')
 
 
 var server = module.exports = express.createServer()
@@ -26,7 +26,6 @@ server.configure('production', function(){
 // Routes
 
 server.all(/\/.*/, function(req, res, next) {
-
   var subdomain = (/(.*)\..*\..*/).exec(req.headers['x-forwarded-host'])[1]
   apploader.load(subdomain, function(err, app) {
     if(err || !app) {
