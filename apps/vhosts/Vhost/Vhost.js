@@ -22,8 +22,9 @@ function isFile(filepath) {
 
 var Vhost = (function(){
   
-  function Vhost(confpath){
-    this.data = {}
+  function Vhost(data){
+    this.data = data || {}
+    this.parseConfig()
   }
   
   Vhost.prototype = new EventEmitter()
@@ -90,13 +91,14 @@ var Vhost = (function(){
   }
   
   Vhost.find = function(configpath, cb) {
-    var vhost = new Vhost()
     fs.readFile(configpath, 'utf8', function(err, configdata) {
       if(err) {
         return cb(err)
       }
-      vhost.set('configpath', configpath)
-      vhost.set('configdata', configdata)
+      var vhost = new Vhost({
+        configpath: configpath,
+        configdata: configdata
+      })
       cb(null, vhost)
     })
   }
@@ -126,6 +128,12 @@ var Vhost = (function(){
 
   Vhost.prototype.save = function(cb) {
     
+  }
+
+  Vhost.prototype.parseConfig = function() {
+    for(var regex in Vhost.regex) {
+      this.set(regex, (Vhost.regex[regex].exec(this.get('configdata') || "") || [])[1])
+    }
   }
 
   Vhost.prototype.set = function(key, val) {

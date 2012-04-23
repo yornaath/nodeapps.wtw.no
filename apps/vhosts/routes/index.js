@@ -12,7 +12,11 @@ Vhost.configure('development', function() {
  */
 
 exports.index = function(req, res){
-  res.render('index')
+  Vhost.all(function(err, vhosts) {
+    res.render('index', {
+      vhosts: JSON.stringify(vhosts)
+    })
+  })
 }
 
 exports.api = {
@@ -20,7 +24,7 @@ exports.api = {
     all: function(req, res) {
       Vhost.all(function(err, vhosts) {
         res.send(vhosts)
-      })     
+      })
     }
   }
 }
