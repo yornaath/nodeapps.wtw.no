@@ -6,9 +6,6 @@
     "express": "2.5.1",
     "jade": ">= 0.0.1"
   },
-  "devDependencies": {
-    "jasmine-node": "~1.0.25"
-  },
   "scripts": {
     "test": "npm test ../Vhost"
   },
