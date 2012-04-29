@@ -1,8 +1,21 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+
+ul#vhosts {
+  margin-top: 60px;
 }
 
-a {
-  color: #00B7FF;
+ul#vhosts li.vhost {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+ul#vhosts li.vhost h2{
+  margin-bottom: 5px;
+}
+
+ul#vhosts li.vhost form {
+}
+
+ul#vhosts li.vhost form .configdata {
+  height: 200px; 
 }

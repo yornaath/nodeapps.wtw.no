@@ -2,6 +2,7 @@
 html
   head
     title= "Vhosts"
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
 
     script
@@ -15,11 +16,19 @@ html
 
   body!= body
 
-  script(type="text/template", id="vhost-template")  
-      div="ServerName:"
-        <%= vhost.get('ServerName') %>
-      div="DocumentRoot:"
-        <%= vhost.get('DocumentRoot') %>
-      div="Directory:"
-        <%= vhost.get('Directory') %>
+  script(type="text/template", id="vhost-template")
+    h2.span12.servername
+      <%= vhost.get('ServerName') %>
+    form
+      div.span6
+          label.label.label-inverse="DocumentRoot"
+          | <input type="text" value="<%= vhost.get('DocumentRoot') %>" class="span6 documentroot" data-attribute="DocumentRoot"/> 
+      div.span6
+          label.label.label-inverse="Directory"
+          | <input type="text" value="<%= vhost.get('Directory') %>" class="span6 directory" data-attribute="Directory"/>
+      div.span12
+        label.label.label-info="Configdata"
+        textarea(class="span12 configdata", data-attribute="configdata")
+          <%= vhost.get('configdata') %>  
+        
       
