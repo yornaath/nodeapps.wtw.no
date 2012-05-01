@@ -12,7 +12,6 @@ function isDir(dirpath) {
     return false
   }
   if(stat && stat.isDirectory()) {
-    console.log(dirpath);
     return true
   }
   return false
@@ -136,8 +135,32 @@ describe('Vhost', function() {
       vhost.save(function(err, vhost) {
         assert.ok(isFile(__dirname + "/vhostconfs/test_wtw_no.conf"))
         assert.ok(isDir(__dirname + "/vhosts/test.wtw.no"))
+        assert.ok(vhost instanceof Vhost)
+        assert.strictEqual(vhost.get('ServerName'), 'test.wtw.no')
+        assert.strictEqual(vhost.get('DocumentRoot'), Vhost.config.vhosts + '/test.wtw.no')
+        assert.strictEqual(vhost.get('Directory'), Vhost.config.vhosts + '/test.wtw.no')
         done()
       })
+    })
+    it('should update the conf file for existing vhosts', function(done) {
+      var vhost = new Vhost({
+        ServerName: 'new.wtw.no',
+        Directory: __dirname + '/vhosts/new.wtw.no'
+      })
+      vhost.save(function(err, vhost) {
+        assert.ok(isFile(__dirname + "/vhostconfs/new_wtw_no.conf"))
+        assert.ok(isDir(__dirname + "/vhosts/new.wtw.no"))
+        assert.ok(vhost instanceof Vhost)
+        assert.strictEqual(vhost.get('ServerName'), 'new.wtw.no')
+        assert.strictEqual(vhost.get('Directory'), __dirname + '/vhosts/new.wtw.no')
+        done()
+      })
+    })
+    it('should receive an error if it could not create a directory at the specified Directory path', function() {
+      //!TODO!
+    })
+    it('should receive an error if the ServerName is in use by another vhost', function() {
+      //!TODO!
     })
   })
 
@@ -145,7 +168,9 @@ describe('Vhost', function() {
   //TEARDOWN
   after(function(done) {
     fs.unlinkSync(__dirname + "/vhostconfs/test_wtw_no.conf")
+    fs.unlinkSync(__dirname + "/vhostconfs/new_wtw_no.conf")
     fs.rmdirSync(__dirname + "/vhosts/test.wtw.no")
+    fs.rmdirSync(__dirname + "/vhosts/new.wtw.no")
     done()
   })
 })

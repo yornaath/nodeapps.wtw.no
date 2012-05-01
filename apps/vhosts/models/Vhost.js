@@ -182,6 +182,17 @@ var Vhost = (function(){
   }
 
   Vhost.prototype.set = function(key, val) {
+    if(!val) {
+      throw new Error('No value specifed to Vhost.prototype.set')
+    }
+    if(key === 'ServerName') {
+      if(!this.get('Directory')) {
+        this.set('Directory', Vhost.config.vhosts + '/' + val) 
+      }
+      if(!this.get('DocumentRoot')) {
+        this.set('DocumentRoot', Vhost.config.vhosts + '/' + val)  
+      }
+    }
     this.data[key] = val
   }
 
@@ -215,9 +226,9 @@ var Vhost = (function(){
       if(err) {
         return cb(err)
       }
-      isDirAsync(Vhost.config.vhosts + "/" + self.get('ServerName'), function(err, vhostDirExists) {
+      isDirAsync(self.get('Directory'), function(err, vhostDirExists) {
         if(!vhostDirExists) {
-          fs.mkdir(Vhost.config.vhosts + "/" + self.get('ServerName'), function(err) {
+          fs.mkdir(self.get('Directory'), function(err) {
             if(err) {
               return cb(err)
             }
