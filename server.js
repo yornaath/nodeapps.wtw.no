@@ -1,8 +1,7 @@
 
 
 var express = require('express'),
-    apploader = require('./apps'),
-    os = require('os')
+    apploader = require('./apps')
 
 
 var server = module.exports = express.createServer()
@@ -38,4 +37,4 @@ server.all(/\/.*/, function(req, res, next) {
 })
 
 server.listen(3000)
-console.log("Express server listening on port %d in %s mode", server.address().port, server.settings.env)
+console.log("nodeapps.wtw.no server listening on port %d in %s mode", server.address().port, server.settings.env)

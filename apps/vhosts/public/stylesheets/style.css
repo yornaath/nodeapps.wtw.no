@@ -1,21 +1,130 @@
 
+.clear {
+  clear: both;
+}
+
+
+#wrapper {
+  margin-top: 40px;
+  overflow: hidden;
+  border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+}
+
+.form-search {
+  margin-top: 0px;
+  padding: 10px;
+  margin-bottom: 0px;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 3px 3px 0px 0px;
+  -moz-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  -webkit-box-shadow: 0px 2px 45px 0px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 100;
+}
+
+.form-search input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+}
+
+
 
 ul#vhosts {
-  margin-top: 60px;
+  position: relative;
+  z-index: 50;
+  background-color: #f7f7f7;
 }
 
 ul#vhosts li.vhost {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  padding: 15px 10px 15px 10px;
+  border-bottom: 1px solid #cecece;
+  -webkit-transition: -webkit-box-shadow 0.3s;
 }
+
+ul#vhosts li.vhost.active {
+  border-color: rgba(0,0,0, 0.46);
+}
+
+ul#vhosts li.vhost.above-active {
+  border-color: rgba(0,0,0, 0.46);
+  box-shadow: inset 0px -30px 20px -30px rgba(0,0,0, 0.5);
+}
+
+ul#vhosts li.vhost.under-active {
+  box-shadow: inset 0px 33px 26px -30px rgba(0,0,0, 0.5);
+}
+
+ul#vhosts li.vhost:hover {
+  background: #fcfcfc;
+}
+
+ul#vhosts li.vhost .span12 {
+  width: 920px;
+}
+
+ul#vhosts li.vhost .span6 {
+  width: 445px;
+}
+
+ul#vhosts li.vhost label {
+  height: 15px;
+  line-height: 15px;
+  padding: 5px;
+  background-color: #F7F7F9;
+  color: #4f4f4f;
+  text-shadow: 0.5px 0.5px rgba(0,0,0, 0.2);
+  width: 100%;
+}
+
+ul#vhosts li.vhost .attribute {
+  position: relative;  
+}
+
+ul#vhosts li.vhost .attribute .badge {
+  opacity: 0.9;
+  display: none;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 1000;
+}
+
 
 ul#vhosts li.vhost h2{
   margin-bottom: 5px;
 }
 
-ul#vhosts li.vhost form {
+ul#vhosts li.vhost h2 .label {
+  float: right;
+  margin-top: 10px;
+}
+
+ul#vhosts li.vhost .form {
+  display: inline-block;
+  overflow: hidden;
+  height: 0px;
+  -webkit-transition: height 0.3s;
+}
+
+ul#vhosts li.vhost.active .form {
+  height: 348px;
 }
 
 ul#vhosts li.vhost form .configdata {
+  width: 910px;
   height: 200px; 
+}
+
+ul#vhosts li.vhost .save.btn {
+  float: right;
+  margin-left: 5px;
+}
+
+ul#vhosts li.vhost .delete.btn {
+  float: right; 
 }

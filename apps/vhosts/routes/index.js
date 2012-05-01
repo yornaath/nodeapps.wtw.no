@@ -1,5 +1,5 @@
 
-var Vhost = require(__dirname + "/../Vhost")
+var Vhost = require(__dirname + "/../Models/Vhost")
 
 Vhost.configure('development', function() {
   this.set('vhostconfs', __dirname + '/../mockdata/vhostconfs')
@@ -7,16 +7,15 @@ Vhost.configure('development', function() {
   this.set('apache', 'apachetl')
 })
 
-/*
- * GET home page.
- */
 
-exports.index = function(req, res){
-  Vhost.all(function(err, vhosts) {
-    res.render('index', {
-      vhosts: JSON.stringify(vhosts)
+exports.views = {
+  index: function(req, res){
+    Vhost.all(function(err, vhosts) {
+      res.render('index', {
+        vhosts: JSON.stringify(vhosts)
+      })
     })
-  })
+  }
 }
 
 exports.api = {

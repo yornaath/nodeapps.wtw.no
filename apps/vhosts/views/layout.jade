@@ -19,16 +19,27 @@ html
   script(type="text/template", id="vhost-template")
     h2.span12.servername
       <%= vhost.get('ServerName') %>
-    form
-      div.span6
-          label.label.label-inverse="DocumentRoot"
-          | <input type="text" value="<%= vhost.get('DocumentRoot') %>" class="span6 documentroot" data-attribute="DocumentRoot"/> 
-      div.span6
-          label.label.label-inverse="Directory"
-          | <input type="text" value="<%= vhost.get('Directory') %>" class="span6 directory" data-attribute="Directory"/>
-      div.span12
-        label.label.label-info="Configdata"
-        textarea(class="span12 configdata", data-attribute="configdata")
-          <%= vhost.get('configdata') %>  
+      span.label=""
+    div.form
+      form
+        div.span6
+            label.label="DocumentRoot"
+            div.attribute.DocumentRoot
+              span.badge=''
+              | <input type="text" value="<%= vhost.get('DocumentRoot') %>" class="span6 documentroot" data-attribute="DocumentRoot"/> 
+        div.span6
+            label.label="Directory"
+            div.attribute.Directory
+              span.badge=''
+              | <input type="text" value="<%= vhost.get('Directory') %>" class="span6 directory" data-attribute="Directory"/>
+        div.span12
+          label.label="Configdata"
+          div.attribute.configdata
+            span.badge=''
+            textarea(class="configdata", data-attribute="configdata")
+              <%= vhost.get('configdata') %>  
+        div.clear
+      submit.save.btn.btn-primary.disabled="Save"
+      submit.save.btn.btn-danger.btn-small="Delete"
+          
         
-      

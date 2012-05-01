@@ -1,0 +1,50 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'test' ]
+info using npm@1.0.104
+info using node@v0.6.15
+verbose config file /Users/gorillatron/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+silly testEngine { name: 'nodeapps.wtw.no',
+silly testEngine   version: '0.0.1',
+silly testEngine   private: true,
+silly testEngine   dependencies: { express: '2.5.1', jade: '>= 0.0.1', forever: '0.8.5' },
+silly testEngine   scripts: { test: 'npm test ../apps/vhosts', start: 'node server.js' },
+silly testEngine   _npmUser: { name: 'gorillatron', email: 'jornandretangen@gmail.com' },
+silly testEngine   _id: 'nodeapps.wtw.no@0.0.1',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.6.15',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /Users/gorillatron/progg/nodeapps.wtw.no/package.json
+verbose loadDefaults nodeapps.wtw.no@0.0.1
+verbose run-script [ 'pretest', 'test', 'posttest' ]
+info pretest nodeapps.wtw.no@0.0.1
+info test nodeapps.wtw.no@0.0.1
+verbose unsafe-perm in lifecycle true
+silly exec sh "-c" "npm test ../apps/vhosts"
+silly spawning [ 'sh',
+silly spawning   [ '-c', 'npm test ../apps/vhosts' ],
+silly spawning   '/Users/gorillatron/progg/nodeapps.wtw.no' ]
+info nodeapps.wtw.no@0.0.1 Failed to exec test script
+ERR! nodeapps.wtw.no@0.0.1 test: `npm test ../apps/vhosts`
+ERR! `sh "-c" "npm test ../apps/vhosts"` failed with 1
+ERR! 
+ERR! Failed at the nodeapps.wtw.no@0.0.1 test script.
+ERR! This is most likely a problem with the nodeapps.wtw.no package,
+ERR! not with npm itself.
+ERR! Tell the author that this fails on your system:
+ERR!     npm test ../apps/vhosts
+ERR! You can get their info via:
+ERR!     npm owner ls nodeapps.wtw.no
+ERR! There is likely additional logging output above.
+ERR! 
+ERR! System Darwin 11.3.0
+ERR! command "node" "/usr/local/bin/npm" "test"
+ERR! cwd /Users/gorillatron/progg/nodeapps.wtw.no
+ERR! node -v v0.6.15
+ERR! npm -v 1.0.104
+ERR! code ELIFECYCLE
+verbose exit [ 1, true ]

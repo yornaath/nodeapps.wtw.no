@@ -3,8 +3,10 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
+var express = require('express'),
+    routes = require('./routes')
+
+require('express-namespace')
 
 var app = module.exports = express.createServer();
 
@@ -29,7 +31,15 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
+app.get('/', routes.views.index);
 
-app.get('/vhost', routes.api.vhost.all)
+app.namespace('/api', function() {
+  
+  app.namespace('/vhost', function() {
+
+    app.get('/', routes.api.vhost.all)
+
+  })
+
+})
 
