@@ -195,7 +195,6 @@ var Vhost = (function(){
       DocumentRoot: this.get('DocumentRoot'),
       Directory: this.get('Directory') 
     }
-    console.log(attrs);
     if(!attrs.DocumentRoot) {
       attrs.DocumentRoot = Vhost.config.vhosts + "/" + this.get('ServerName')
     }
@@ -210,8 +209,25 @@ var Vhost = (function(){
   }
 
   Vhost.prototype.save = function(cb) {
-    var conf = this.generateConfFromTemplate()
-    
+    var self = this,
+        conf = this.generateConfFromTemplate()
+    fs.writeFile(Vhost.serverNameToFilePath(self.get('ServerName')), conf, 'utf8', function(err) {
+      if(err) {
+        return cb(err)
+      }
+      isDirAsync(Vhost.config.vhosts + "/" + self.get('ServerName'), function(err, vhostDirExists) {
+        if(!vhostDirExists) {
+          fs.mkdir(Vhost.config.vhosts + "/" + self.get('ServerName'), function(err) {
+            if(err) {
+              return cb(err)
+            }
+            cb(null, new Vhost(Vhost.parseConf(conf)))    
+          })
+        } else {
+          cb(null, new Vhost(Vhost.parseConf(conf))) 
+        }
+      })
+    })
   }
 
   Vhost.prototype.toJSON = function() {

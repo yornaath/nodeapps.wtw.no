@@ -7,11 +7,12 @@ var Vhost = require(__dirname + '/../../models/Vhost'),
 
 function isDir(dirpath) {
   try {
-    var stat = fs.lstatSync(filepath)  
+    var stat = fs.lstatSync(dirpath)  
   } catch(e) {
     return false
   }
   if(stat && stat.isDirectory()) {
+    console.log(dirpath);
     return true
   }
   return false
@@ -143,6 +144,8 @@ describe('Vhost', function() {
 
   //TEARDOWN
   after(function(done) {
+    fs.unlinkSync(__dirname + "/vhostconfs/test_wtw_no.conf")
+    fs.rmdirSync(__dirname + "/vhosts/test.wtw.no")
     done()
   })
 })
